@@ -1,0 +1,40 @@
+name: main
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      PYTHON_VERSION: '3.7'
+    strategy:
+      fail-fast: false
+      matrix:
+        poetry-version:
+          - 1.0.9
+          - 1.1.8
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: setup
+        run: |
+          python -m pip install --upgrade pip setuptools wheel black==19.10b0 isort
+          pip install "poetry==${{ matrix.poetry-version }}"
+
+      - name: black
+        run: black --check .
+
+      - name: isort
+        run: isort --check .
+
+      - name: poetry install
+        working-directory: app/
+        run: poetry install
