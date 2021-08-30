@@ -34,7 +34,7 @@ jobs:
 
       - name: poetry install
         working-directory: app/
-        run: poetry install
+        run: poetry install -vvv
 
       - name: run the app
         working-directory: app/
