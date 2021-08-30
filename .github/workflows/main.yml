@@ -38,3 +38,7 @@ jobs:
       - name: poetry install
         working-directory: app/
         run: poetry install
+
+      - name: run the app
+        working-directory: app/
+        run: poetry run python -m src.app
