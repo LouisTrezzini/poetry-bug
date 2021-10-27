@@ -16,6 +16,8 @@ jobs:
         poetry-version:
           - 1.0.9
           - 1.1.8
+          - 1.1.11
+          - 1.2.0a2
     steps:
       - uses: actions/checkout@v2
 
